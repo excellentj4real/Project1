@@ -1,0 +1,1199 @@
+/* ============================================================
+   TREAL TIMEPIECES — style.css
+   Dark luxury aesthetic: near-black backgrounds, antique gold
+   Mobile-first, responsive, CSS custom properties throughout
+   ============================================================ */
+
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================ */
+:root {
+  /* Colors */
+  --black:        #080808;
+  --dark:         #0f0f0f;
+  --dark-mid:     #161616;
+  --dark-card:    #131313;
+  --gold:         #c9a84c;
+  --gold-light:   #e8d5a3;
+  --gold-dim:     #7a6228;
+  --gold-glow:    rgba(201, 168, 76, 0.18);
+  --white:        #f5f5f0;
+  --white-dim:    rgba(245, 245, 240, 0.6);
+  --white-faint:  rgba(245, 245, 240, 0.08);
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Montserrat', Helvetica, sans-serif;
+
+  /* Spacing */
+  --section-pad:  clamp(80px, 10vw, 140px);
+  --container:    1200px;
+  --gap:          clamp(24px, 4vw, 48px);
+
+  /* Transitions */
+  --ease-gold:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition:   0.4s var(--ease-gold);
+}
+
+
+/* ============================================================
+   2. RESET & BASE STYLES
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  /* Subtle noise texture overlay for depth */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul { list-style: none; }
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+
+/* ============================================================
+   3. UTILITY CLASSES
+   ============================================================ */
+
+/* Centered max-width wrapper */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 60px);
+}
+
+/* Section eyebrow label (small gold uppercase text above headings) */
+.section-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+/* Main section headings */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  color: var(--white-dim);
+  max-width: 480px;
+}
+
+/* Decorative gold rule with diamond */
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: clamp(40px, 6vw, 80px);
+}
+.rule-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+.rule-diamond {
+  color: var(--gold);
+  font-size: 0.6rem;
+  flex-shrink: 0;
+}
+
+/* Centered section header block */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(48px, 7vw, 80px);
+}
+.section-header .section-title { margin-bottom: 12px; }
+.section-header .section-subtitle { margin: 0 auto; }
+
+
+/* ============================================================
+   4. SCROLL REVEAL ANIMATIONS
+   Elements start hidden; JS adds .is-visible to trigger them
+   ============================================================ */
+.reveal-up,
+.reveal-left,
+.reveal-right {
+  opacity: 0;
+  transition: opacity 0.8s var(--ease-gold), transform 0.8s var(--ease-gold);
+}
+
+.reveal-up    { transform: translateY(40px); }
+.reveal-left  { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+
+.reveal-up.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* Staggered animation delays */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.25s; }
+.delay-3 { transition-delay: 0.4s; }
+
+
+/* ============================================================
+   5. BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Solid gold fill button */
+.btn-primary {
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
+}
+.btn-primary:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+  box-shadow: 0 0 30px var(--gold-glow);
+  transform: translateY(-2px);
+}
+
+/* Outline / ghost button */
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(245, 245, 240, 0.3);
+}
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* WhatsApp CTA button */
+.btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  border-color: #25D366;
+  font-size: 0.8rem;
+  padding: 18px 40px;
+  border-radius: 2px;
+}
+.btn-whatsapp:hover {
+  background: #1ebe5d;
+  box-shadow: 0 0 40px rgba(37, 211, 102, 0.3);
+  transform: translateY(-2px);
+}
+.whatsapp-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   6. NAVIGATION BAR
+   ============================================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 28px 0;
+  transition: background 0.5s ease, padding 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* Scrolled state — applied via JS */
+.navbar.scrolled {
+  padding: 16px 0;
+  background: rgba(8, 8, 8, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 60px);
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+}
+.logo-sub {
+  font-family: var(--font-body);
+  font-size: 0.45rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  margin-top: 2px;
+}
+
+/* Desktop nav links */
+.nav-links {
+  display: none; /* Hidden on mobile, shown on desktop */
+  align-items: center;
+  gap: 40px;
+}
+.nav-link {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  position: relative;
+  transition: color var(--transition);
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width var(--transition);
+}
+.nav-link:hover { color: var(--gold); }
+.nav-link:hover::after { width: 100%; }
+
+/* Nav CTA button */
+.nav-cta {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  padding: 10px 22px;
+  transition: var(--transition);
+}
+.nav-cta:hover {
+  background: var(--gold);
+  color: var(--black);
+  border-color: var(--gold);
+}
+
+/* Hamburger button */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  z-index: 1001;
+}
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--white);
+  transition: var(--transition);
+  transform-origin: center;
+}
+
+/* Animated hamburger → X */
+.hamburger.active .hamburger-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.hamburger.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.active .hamburger-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile menu overlay */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 8, 8, 0.98);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+}
+.mobile-menu.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+.mobile-link {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 300;
+  color: var(--white-dim);
+  transition: color 0.3s ease;
+}
+.mobile-link:hover { color: var(--gold); }
+
+/* Desktop: show nav links, hide hamburger */
+@media (min-width: 768px) {
+  .nav-links   { display: flex; }
+  .hamburger   { display: none; }
+  .mobile-menu { display: none; }
+}
+
+
+/* ============================================================
+   7. HERO SECTION
+   ============================================================ */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100svh; /* full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* Canvas for particle animation (JS-driven) */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* Radial gradient overlay for depth */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 60%, transparent 0%, var(--black) 70%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%);
+  z-index: 1;
+}
+
+/* Hero text content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 120px clamp(20px, 5vw, 60px) 80px;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+/* Giant stacked title */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 0.95;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hero-title-line {
+  display: block;
+  font-size: clamp(4rem, 14vw, 11rem);
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+.hero-title-line.italic {
+  font-style: italic;
+  font-size: clamp(2rem, 7vw, 5.5rem);
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+
+.hero-tagline {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: var(--white-dim);
+  line-height: 1.9;
+  margin-bottom: 48px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-tagline em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.5;
+}
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+
+/* ============================================================
+   8. ABOUT SECTION
+   ============================================================ */
+.about {
+  background: var(--dark);
+  padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background diamond watermark */
+.about::before {
+  content: '◆';
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 400px;
+  color: rgba(201, 168, 76, 0.02);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+  }
+}
+
+/* Big decorative "T" visual */
+.about-visual {
+  position: relative;
+  text-align: center;
+}
+.about-number {
+  font-family: var(--font-display);
+  font-size: clamp(10rem, 20vw, 18rem);
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--gold-dim);
+  display: block;
+  user-select: none;
+}
+.about-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 8px 20px;
+  white-space: nowrap;
+}
+
+/* Copy side */
+.about-copy .section-title { margin-bottom: 28px; }
+
+.about-text {
+  font-size: 0.9rem;
+  color: var(--white-dim);
+  margin-bottom: 20px;
+  line-height: 1.9;
+}
+
+/* Brand stats row */
+.about-stats {
+  display: flex;
+  gap: clamp(24px, 4vw, 48px);
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  flex-wrap: wrap;
+}
+.stat { display: flex; flex-direction: column; gap: 4px; }
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+}
+
+
+/* ============================================================
+   9. COLLECTION SECTION
+   ============================================================ */
+.collection {
+  background: var(--black);
+  padding: var(--section-pad) 0;
+}
+
+/* 1 column mobile → 3 column desktop */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 640px) {
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 960px) {
+  .cards-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Individual watch card */
+.watch-card {
+  background: var(--dark-card);
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  overflow: hidden;
+  position: relative;
+}
+.watch-card:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px var(--gold-glow);
+}
+
+/* Card image wrapper */
+.card-image-wrap {
+  position: relative;
+  padding: 48px 32px 32px;
+  background: linear-gradient(160deg, #111 0%, #0a0a0a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 280px;
+  overflow: hidden;
+}
+.card-image-wrap.featured {
+  background: linear-gradient(160deg, #1a1500 0%, #0f0d00 100%);
+}
+
+/* Ambient glow behind watch */
+.card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, var(--gold-glow), transparent);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+.watch-card:hover .card-glow { opacity: 1; }
+
+/* Bestseller badge */
+.featured-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--black);
+  padding: 5px 12px;
+}
+
+/* Card text body */
+.card-body { padding: 24px 28px 28px; }
+
+.card-collection {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.card-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.card-desc {
+  font-size: 0.82rem;
+  color: var(--white-dim);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+/* Card footer: price + link */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid rgba(201, 168, 76, 0.1);
+}
+.card-price {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--gold-light);
+}
+.card-btn {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: color var(--transition), letter-spacing var(--transition);
+}
+.card-btn:hover {
+  color: var(--gold-light);
+  letter-spacing: 0.3em;
+}
+
+
+/* ============================================================
+   10. WATCH ILLUSTRATION (CSS-drawn watch faces)
+   ============================================================ */
+.watch-illustration {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  transform: scale(1);
+  transition: transform 0.5s var(--ease-gold);
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.6));
+}
+.watch-card:hover .watch-illustration {
+  transform: scale(1.05) translateY(-4px);
+}
+
+/* Strap pieces */
+.watch-strap-top,
+.watch-strap-bottom {
+  width: 52px;
+  height: 48px;
+  border-radius: 3px;
+}
+
+/* Case & dial */
+.watch-case {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.watch-dial {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.watch-crown-top {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 20px;
+  border-radius: 2px;
+}
+.watch-inner-dial {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Clock hands */
+.watch-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 2px;
+}
+.hour-hand {
+  width: 3px;
+  height: 30px;
+  margin-left: -1.5px;
+  transform: rotate(-30deg);
+}
+.minute-hand {
+  width: 2px;
+  height: 40px;
+  margin-left: -1px;
+  transform: rotate(120deg);
+}
+
+/* Center dot */
+.watch-center-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Brand mark inside dial */
+.watch-brand-mark {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: 0.4rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+
+/* Hour indices */
+.watch-indices {
+  position: absolute;
+  inset: 0;
+}
+.index {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 0.45rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transform: translate(-50%, -50%);
+}
+.i12 { top: 8%;  left: 50%; }
+.i3  { top: 50%; left: 92%; }
+.i6  { top: 92%; left: 50%; }
+.i9  { top: 50%; left: 8%; }
+
+/* ---- Watch Noir (black/gold) ---- */
+.watch-noir .watch-strap-top,
+.watch-noir .watch-strap-bottom { background: #1a1a1a; border: 1px solid #2a2a2a; }
+.watch-noir .watch-case {
+  background: radial-gradient(circle at 35% 35%, #2a2a2a, #0d0d0d);
+  border: 3px solid var(--gold-dim);
+  box-shadow: 0 0 0 1px #111, inset 0 1px 2px rgba(255,255,255,0.05);
+}
+.watch-noir .watch-dial { background: transparent; }
+.watch-noir .watch-inner-dial {
+  background: radial-gradient(circle at 40% 30%, #1c1c1c, #080808);
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.watch-noir .watch-crown-top { background: var(--gold-dim); }
+.watch-noir .hour-hand, .watch-noir .minute-hand { background: var(--gold); }
+.watch-noir .watch-center-dot { background: var(--gold); }
+.watch-noir .watch-brand-mark { color: var(--gold); }
+.watch-noir .index { color: var(--gold-light); }
+
+/* ---- Watch Aurum (gold/rich) ---- */
+.watch-aurum .watch-strap-top,
+.watch-aurum .watch-strap-bottom {
+  background: linear-gradient(to bottom, #4a3000, #2e1e00);
+  border: 1px solid #5a3e0a;
+}
+.watch-aurum .watch-case {
+  background: radial-gradient(circle at 35% 35%, #c9a84c, #7a5a1a);
+  border: 3px solid #e8d5a3;
+  box-shadow: 0 0 20px rgba(201,168,76,0.3), inset 0 1px 2px rgba(255,255,255,0.2);
+}
+.watch-aurum .watch-inner-dial {
+  background: radial-gradient(circle at 40% 30%, #fdf6e0, #c9a84c);
+  border: 1px solid rgba(201,168,76,0.6);
+}
+.watch-aurum .watch-crown-top { background: var(--gold-light); }
+.watch-aurum .hour-hand, .watch-aurum .minute-hand { background: #3a2600; }
+.watch-aurum .watch-center-dot { background: #3a2600; box-shadow: 0 0 4px rgba(0,0,0,0.5); }
+.watch-aurum .watch-brand-mark { color: #3a2600; }
+.watch-aurum .index { color: #4a3000; }
+
+/* ---- Watch Obsidian (dark titanium) ---- */
+.watch-obsidian .watch-strap-top,
+.watch-obsidian .watch-strap-bottom { background: #222; border: 1px solid #333; }
+.watch-obsidian .watch-case {
+  background: radial-gradient(circle at 35% 35%, #4a4a4a, #1a1a1a);
+  border: 3px solid #555;
+  box-shadow: 0 0 0 1px #111, inset 0 1px 2px rgba(255,255,255,0.08);
+}
+.watch-obsidian .watch-inner-dial {
+  background: transparent;
+  border: 1px solid #444;
+  /* Skeleton-like effect */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+.watch-obsidian .watch-crown-top { background: #666; }
+.watch-obsidian .hour-hand { background: #fff; }
+.watch-obsidian .minute-hand { background: var(--gold); }
+.watch-obsidian .watch-center-dot { background: var(--gold); box-shadow: 0 0 6px var(--gold); }
+.watch-obsidian .watch-brand-mark { color: #888; }
+.watch-obsidian .index { color: #777; }
+
+
+/* ============================================================
+   11. TESTIMONIALS SECTION
+   ============================================================ */
+.testimonials {
+  background: var(--dark);
+  padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Large faint quote mark watermark */
+.testimonials::before {
+  content: '"';
+  position: absolute;
+  left: -40px;
+  top: 0;
+  font-family: var(--font-display);
+  font-size: 500px;
+  color: rgba(201, 168, 76, 0.02);
+  line-height: 0.8;
+  pointer-events: none;
+  user-select: none;
+}
+
+.testimonials-track {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 640px) {
+  .testimonials-track { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .testimonials-track { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Individual testimonial card */
+.testimonial-card {
+  background: var(--dark-card);
+  border: 1px solid rgba(201, 168, 76, 0.08);
+  padding: clamp(28px, 4vw, 44px);
+  position: relative;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.testimonial-card:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Decorative large open-quote */
+.quote-mark {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: var(--gold);
+  line-height: 0.6;
+  margin-bottom: 24px;
+  opacity: 0.5;
+  display: block;
+}
+
+.quote-text {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--white);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.quote-author {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(201, 168, 76, 0.12);
+}
+.author-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.author-title {
+  font-size: 0.7rem;
+  color: var(--white-dim);
+  letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   12. WHATSAPP CTA SECTION
+   ============================================================ */
+.cta-section {
+  position: relative;
+  padding: var(--section-pad) 0;
+  text-align: center;
+  overflow: hidden;
+  background: var(--black);
+}
+
+/* Gold geometric decorative lines */
+.cta-section::before,
+.cta-section::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+}
+.cta-section::before { top: 0; height: 80px; }
+.cta-section::after  { bottom: 0; height: 80px; }
+
+.cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(201,168,76,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-content { position: relative; z-index: 1; }
+
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.cta-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.cta-subtitle {
+  font-size: 0.9rem;
+  color: var(--white-dim);
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.9;
+}
+
+
+/* ============================================================
+   13. FOOTER
+   ============================================================ */
+.footer {
+  background: var(--dark-card);
+  border-top: 1px solid rgba(201, 168, 76, 0.1);
+  padding: 48px 0;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.footer-copy {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 240, 0.3);
+  margin-top: 8px;
+}
+
+
+/* ============================================================
+   14. FLOATING WHATSAPP BUTTON
+   ============================================================ */
+.float-whatsapp {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 9999;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s var(--ease-gold), box-shadow 0.3s ease;
+}
+.float-whatsapp svg {
+  width: 28px;
+  height: 28px;
+}
+.float-whatsapp:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+/* Pulsing ring around floating button */
+.float-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, 0.5);
+  animation: floatPulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatPulse {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  70%  { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* On small screens move button slightly inward */
+@media (max-width: 480px) {
+  .float-whatsapp {
+    bottom: 24px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+  }
+}

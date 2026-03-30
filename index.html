@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Treal — Luxury timepieces crafted for those who command time."
+    />
+    <title>Treal | Luxury Timepieces</title>
+
+    <!-- Google Fonts: Cormorant Garamond (display) + Montserrat (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- ======================================================
+         NAVIGATION BAR
+         Fixed top bar with logo and a contact CTA
+    ====================================================== -->
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
+      <div class="nav-container">
+        <!-- Brand Logo -->
+        <a href="#home" class="nav-logo" aria-label="Treal Home">
+          <span class="logo-text">TREAL</span>
+          <span class="logo-sub">TIMEPIECES</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links" role="list">
+          <li><a href="#about" class="nav-link">Our Story</a></li>
+          <li><a href="#collection" class="nav-link">Collection</a></li>
+          <li><a href="#testimonials" class="nav-link">Clients</a></li>
+          <li>
+            <a
+              href="#whatsapp-cta"
+              class="nav-cta"
+              aria-label="Contact us on WhatsApp"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+
+        <!-- Mobile Hamburger Button -->
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <div
+        class="mobile-menu"
+        id="mobile-menu"
+        role="dialog"
+        aria-label="Mobile navigation"
+      >
+        <ul class="mobile-links" role="list">
+          <li><a href="#about" class="mobile-link">Our Story</a></li>
+          <li><a href="#collection" class="mobile-link">Collection</a></li>
+          <li><a href="#testimonials" class="mobile-link">Clients</a></li>
+          <li><a href="#whatsapp-cta" class="mobile-link">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ======================================================
+         HERO SECTION
+         Full-screen cinematic intro with tagline and CTA
+    ====================================================== -->
+    <section class="hero" id="home" aria-label="Hero introduction">
+      <!-- Animated background canvas (particles handled in JS) -->
+      <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
+      <!-- Decorative diagonal overlay -->
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <!-- Hero Content -->
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal-up">
+          Est. 2024 &nbsp;·&nbsp; Geneva Inspired
+        </p>
+        <h1 class="hero-title reveal-up delay-1">
+          <span class="hero-title-line">TIME</span>
+          <span class="hero-title-line italic">is your</span>
+          <span class="hero-title-line">EMPIRE</span>
+        </h1>
+        <p class="hero-tagline reveal-up delay-2">
+          Treal crafts timepieces for those who do not follow the hour —<br />
+          <em>they set it.</em>
+        </p>
+        <div class="hero-actions reveal-up delay-3">
+          <a href="#collection" class="btn btn-primary">Explore Catalogue</a>
+          <a href="#about" class="btn btn-ghost">Our Story</a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-line"></span>
+        <span class="scroll-label">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         ABOUT / BRAND STORY SECTION
+    ====================================================== -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <!-- Decorative gold rule -->
+        <div class="section-rule reveal-up" aria-hidden="true">
+          <span class="rule-line"></span>
+          <span class="rule-diamond">◆</span>
+          <span class="rule-line"></span>
+        </div>
+
+        <div class="about-grid">
+          <!-- Left: Large decorative number -->
+          <div class="about-visual reveal-left" aria-hidden="true">
+            <span class="about-number">T</span>
+            <div class="about-badge">Luxury Redefined</div>
+          </div>
+
+          <!-- Right: Story copy -->
+          <div class="about-copy reveal-right">
+            <p class="section-eyebrow">The Treal Story</p>
+            <h2 class="section-title" id="about-title">
+              Born from the belief that true luxury has no compromise
+            </h2>
+            <p class="about-text">
+              Treal was forged at the intersection of ruthless precision and
+              timeless artistry. Every watch that bears our name is a
+              declaration — a statement worn on the wrist of individuals who
+              have earned the right to demand the extraordinary.
+            </p>
+            <p class="about-text">
+              We do not mass-produce. We do not settle. Each Treal piece
+              undergoes hundreds of hours of hand-finishing, sourcing only the
+              rarest materials from the world's most discerning suppliers.
+            </p>
+            <div class="about-stats" role="list">
+              <div class="stat" role="listitem">
+                <span class="stat-number">100+</span>
+                <span class="stat-label">Hours per piece</span>
+              </div>
+              <div class="stat" role="listitem">
+                <span class="stat-number">42</span>
+                <span class="stat-label">Countries served</span>
+              </div>
+              <div class="stat" role="listitem">
+                <span class="stat-number">∞</span>
+                <span class="stat-label">Year warranty</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         COLLECTION SECTION
+         Featured watch cards with hover effects
+    ====================================================== -->
+    <section
+      class="collection"
+      id="collection"
+      aria-labelledby="collection-title"
+    >
+      <div class="container">
+        <div class="section-header reveal-up">
+          <p class="section-eyebrow">Our Timepieces</p>
+          <h2 class="section-title" id="collection-title">
+            The Treal Collection
+          </h2>
+          <p class="section-subtitle">
+            Three expressions of the same obsession — perfection.
+          </p>
+        </div>
+
+        <!-- Watch Cards Grid -->
+        <div class="cards-grid" role="list">
+          <!-- Card 1: Noir Sovereign -->
+          <article
+            class="watch-card reveal-up delay-1"
+            role="listitem"
+            aria-label="Noir Sovereign watch"
+          >
+            <div class="card-image-wrap">
+              <!-- SVG placeholder illustration of a watch face -->
+              <div class="watch-illustration watch-noir" aria-hidden="true">
+                <div class="watch-case">
+                  <div class="watch-dial">
+                    <div class="watch-crown-top"></div>
+                    <div class="watch-inner-dial">
+                      <div class="watch-hand hour-hand"></div>
+                      <div class="watch-hand minute-hand"></div>
+                      <div class="watch-center-dot"></div>
+                      <span class="watch-brand-mark">TREAL</span>
+                      <div class="watch-indices">
+                        <span class="index i12">XII</span>
+                        <span class="index i3">III</span>
+                        <span class="index i6">VI</span>
+                        <span class="index i9">IX</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="watch-strap-top"></div>
+                <div class="watch-strap-bottom"></div>
+              </div>
+              <div class="card-glow" aria-hidden="true"></div>
+            </div>
+            <div class="card-body">
+              <p class="card-collection">Signature Series</p>
+              <h3 class="card-name">Noir Sovereign</h3>
+              <p class="card-desc">
+                Midnight black ceramic case with 18k gold indices. The watch
+                that commands every room.
+              </p>
+              <div class="card-footer">
+                <span class="card-price">From $12,000</span>
+                <a
+                  href="#whatsapp-cta"
+                  class="card-btn"
+                  aria-label="Inquire about Noir Sovereign"
+                >
+                  Inquire →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Aurum Legacy -->
+          <article
+            class="watch-card reveal-up delay-2"
+            role="listitem"
+            aria-label="Aurum Legacy watch"
+          >
+            <div class="card-image-wrap featured">
+              <div class="watch-illustration watch-aurum" aria-hidden="true">
+                <div class="watch-case">
+                  <div class="watch-dial">
+                    <div class="watch-crown-top"></div>
+                    <div class="watch-inner-dial">
+                      <div class="watch-hand hour-hand"></div>
+                      <div class="watch-hand minute-hand"></div>
+                      <div class="watch-center-dot"></div>
+                      <span class="watch-brand-mark">TREAL</span>
+                      <div class="watch-indices">
+                        <span class="index i12">XII</span>
+                        <span class="index i3">III</span>
+                        <span class="index i6">VI</span>
+                        <span class="index i9">IX</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="watch-strap-top"></div>
+                <div class="watch-strap-bottom"></div>
+              </div>
+              <div class="card-glow" aria-hidden="true"></div>
+              <div class="featured-badge">Bestseller</div>
+            </div>
+            <div class="card-body">
+              <p class="card-collection">Imperial Series</p>
+              <h3 class="card-name">Aurum Legacy</h3>
+              <p class="card-desc">
+                Solid 18k yellow gold with sapphire crystal and hand-stitched
+                alligator strap. Pure heritage.
+              </p>
+              <div class="card-footer">
+                <span class="card-price">From $28,000</span>
+                <a
+                  href="#whatsapp-cta"
+                  class="card-btn"
+                  aria-label="Inquire about Aurum Legacy"
+                >
+                  Inquire →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Obsidian Titan -->
+          <article
+            class="watch-card reveal-up delay-3"
+            role="listitem"
+            aria-label="Obsidian Titan watch"
+          >
+            <div class="card-image-wrap">
+              <div class="watch-illustration watch-obsidian" aria-hidden="true">
+                <div class="watch-case">
+                  <div class="watch-dial">
+                    <div class="watch-crown-top"></div>
+                    <div class="watch-inner-dial">
+                      <div class="watch-hand hour-hand"></div>
+                      <div class="watch-hand minute-hand"></div>
+                      <div class="watch-center-dot"></div>
+                      <span class="watch-brand-mark">TREAL</span>
+                      <div class="watch-indices">
+                        <span class="index i12">XII</span>
+                        <span class="index i3">III</span>
+                        <span class="index i6">VI</span>
+                        <span class="index i9">IX</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="watch-strap-top"></div>
+                <div class="watch-strap-bottom"></div>
+              </div>
+              <div class="card-glow" aria-hidden="true"></div>
+            </div>
+            <div class="card-body">
+              <p class="card-collection">Titan Series</p>
+              <h3 class="card-name">Obsidian Titan</h3>
+              <p class="card-desc">
+                Grade-5 titanium skeleton dial with tourbillon movement.
+                Engineering as art.
+              </p>
+              <div class="card-footer">
+                <span class="card-price">From $45,000</span>
+                <a
+                  href="#whatsapp-cta"
+                  class="card-btn"
+                  aria-label="Inquire about Obsidian Titan"
+                >
+                  Inquire →
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- /.cards-grid -->
+      </div>
+    </section>
+
+    <!-- ======================================================
+         TESTIMONIALS SECTION
+    ====================================================== -->
+    <section
+      class="testimonials"
+      id="testimonials"
+      aria-labelledby="testimonials-title"
+    >
+      <div class="container">
+        <div class="section-rule reveal-up" aria-hidden="true">
+          <span class="rule-line"></span>
+          <span class="rule-diamond">◆</span>
+          <span class="rule-line"></span>
+        </div>
+
+        <div class="section-header reveal-up">
+          <p class="section-eyebrow">Client Voices</p>
+          <h2 class="section-title" id="testimonials-title">
+            Worn by the Exceptional
+          </h2>
+        </div>
+
+        <!-- Testimonials Slider Wrapper -->
+        <div class="testimonials-track" role="list">
+          <!-- Testimonial 1 -->
+          <blockquote
+            class="testimonial-card reveal-up delay-1"
+            role="listitem"
+          >
+            <div class="quote-mark" aria-hidden="true">"</div>
+            <p class="quote-text">
+              Treal is not just a watch — it is the most powerful accessory I
+              own. Every boardroom I enter, it speaks before I do.
+            </p>
+            <footer class="quote-author">
+              <span class="author-name">James A.</span>
+              <span class="author-title">CEO, Private Equity Firm — Dubai</span>
+            </footer>
+          </blockquote>
+
+          <!-- Testimonial 2 -->
+          <blockquote
+            class="testimonial-card reveal-up delay-2"
+            role="listitem"
+          >
+            <div class="quote-mark" aria-hidden="true">"</div>
+            <p class="quote-text">
+              I have owned Patek and Rolex. Treal is different — it feels
+              personal, like they built it knowing exactly who I am.
+            </p>
+            <footer class="quote-author">
+              <span class="author-name">Marcus V.</span>
+              <span class="author-title">Art Collector — London</span>
+            </footer>
+          </blockquote>
+
+          <!-- Testimonial 3 -->
+          <blockquote
+            class="testimonial-card reveal-up delay-3"
+            role="listitem"
+          >
+            <div class="quote-mark" aria-hidden="true">"</div>
+            <p class="quote-text">
+              The craftsmanship is unparalleled. My Aurum Legacy arrived like a
+              work of art — I couldn't put it down for three days.
+            </p>
+            <footer class="quote-author">
+              <span class="author-name">Sophia R.</span>
+              <span class="author-title">Entrepreneur — Monaco</span>
+            </footer>
+          </blockquote>
+        </div>
+        <!-- /.testimonials-track -->
+      </div>
+    </section>
+
+    <!-- ======================================================
+         WHATSAPP CTA SECTION
+         Final call-to-action before footer
+    ====================================================== -->
+    <section class="cta-section" id="whatsapp-cta" aria-labelledby="cta-title">
+      <div class="cta-overlay" aria-hidden="true"></div>
+      <div class="container">
+        <div class="cta-content reveal-up">
+          <p class="section-eyebrow">Private Consultation</p>
+          <h2 class="cta-title" id="cta-title">
+            Reserve your Treal.<br />
+            <em>A conversation begins it.</em>
+          </h2>
+          <p class="cta-subtitle">
+            Our concierge team is available exclusively via WhatsApp for private
+            inquiries and bespoke orders.
+          </p>
+          <a
+            href="https://wa.me/1234567890?text=Hello%20Treal%2C%20I%20would%20like%20to%20inquire%20about%20your%20collection."
+            class="btn btn-whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contact Treal on WhatsApp"
+          >
+            <!-- WhatsApp Icon SVG -->
+            <svg
+              class="whatsapp-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              />
+            </svg>
+            Message Us on WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         FOOTER
+    ====================================================== -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <span class="logo-text">TREAL</span>
+            <span class="logo-sub">TIMEPIECES</span>
+          </div>
+          <p class="footer-tagline">Time is your empire.</p>
+          <p class="footer-copy">
+            &copy; <span id="year"></span> Treal Timepieces. All rights
+            reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ======================================================
+         FLOATING WHATSAPP BUTTON
+         Always visible, bottom-right corner
+    ====================================================== -->
+    <a
+      href="https://wa.me/1234567890?text=Hello%20Treal%2C%20I%20would%20like%20to%20inquire%20about%20your%20collection."
+      class="float-whatsapp"
+      id="floatWhatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat with Treal on WhatsApp"
+      title="Chat with us on WhatsApp"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+        />
+      </svg>
+      <!-- Pulse ring animation -->
+      <span class="float-pulse" aria-hidden="true"></span>
+    </a>
+
+    <!-- Main JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
