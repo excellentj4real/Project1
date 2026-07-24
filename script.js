@@ -52,95 +52,96 @@ document.querySelectorAll(".rv,.rv-l,.rv-r").forEach((el, i) => {
 const lb = document.getElementById("lb"),
   lbImg = document.getElementById("lbImg"),
   lbX = document.getElementById("lbX");
-document.querySelectorAll(".gi").forEach((gi) => {
-  gi.addEventListener("click", () => {
-    lbImg.src = "data:image/jpeg;base64," + gi.dataset.b64;
-    lbImg.alt = gi.dataset.alt || "Product image";
-    lb.classList.add("open");
-    document.body.style.overflow = "hidden";
+
+if (lb && lbImg && lbX) {
+  document.querySelectorAll(".gi").forEach((gi) => {
+    gi.addEventListener("click", () => {
+      lbImg.src = "data:image/jpeg;base64," + gi.dataset.b64;
+      lbImg.alt = gi.dataset.alt || "Product image";
+      lb.classList.add("open");
+      document.body.style.overflow = "hidden";
+    });
   });
-});
-const closeLB = () => {
-  lb.classList.remove("open");
-  document.body.style.overflow = "";
-};
-lbX.addEventListener("click", closeLB);
-lb.addEventListener("click", (e) => {
-  if (e.target === lb) closeLB();
-});
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeLB();
-});
+  const closeLB = () => {
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+  };
+  lbX.addEventListener("click", closeLB);
+  lb.addEventListener("click", (e) => {
+    if (e.target === lb) closeLB();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLB();
+  });
+}
 
 /* FORM */
-const oForm = document.getElementById('oForm'),
-      oBtn = document.getElementById('oBtn'),
-      oBtnTxt = document.getElementById('oBtnTxt');
-
-const fmOk = document.getElementById('fmOk'),
-      fmErr = document.getElementById('fmErr');
+const oForm = document.getElementById("oForm"),
+  oBtn = document.getElementById("oBtn"),
+  oBtnTxt = document.getElementById("oBtnTxt"),
+  fmOk = document.getElementById("fmOk"),
+  fmErr = document.getElementById("fmErr");
 
 function validate() {
-  if (!document.getElementById('fn').value.trim()) {
-    alert('Please enter your name.');
+  if (!document.getElementById("fn").value.trim()) {
+    alert("Please enter your name.");
     return false;
   }
 
-  if (!document.getElementById('fp').value.trim()) {
-    alert('Please enter your phone number.');
+  if (!document.getElementById("fp").value.trim()) {
+    alert("Please enter your phone number.");
     return false;
   }
 
-  if (!document.getElementById('fc').value) {
-    alert('Please select your country.');
+  if (!document.getElementById("fc").value) {
+    alert("Please select your country.");
     return false;
   }
 
-  if (!document.getElementById('fq').value) {
-    alert('Please select your quantity/package.');
+  if (!document.getElementById("fr").value.trim()) {
+    alert("Please enter your region/state.");
     return false;
   }
 
-  if (!document.getElementById('fa').value.trim()) {
-    alert('Please enter your delivery address.');
+  if (!document.getElementById("fq").value) {
+    alert("Please select your quantity/package.");
+    return false;
+  }
+
+  if (!document.getElementById("fa").value.trim()) {
+    alert("Please enter your delivery address.");
     return false;
   }
 
   return true;
 }
 
-oForm.addEventListener('submit', async e => {
-  e.preventDefault();
+oForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
 
   if (!validate()) return;
 
   oBtn.disabled = true;
-  oBtnTxt.textContent = 'Sending…';
-
-  fmOk.className = 'fm';
-  fmErr.className = 'fm';
+  oBtnTxt.textContent = "Submitting...";
 
   try {
-    const r = await fetch(oForm.action, {
-      method: 'POST',
-      body: new FormData(oForm),
-      headers: {
-        Accept: 'application/json'
-      }
+    const response = await fetch(this.action, {
+      method: this.method,
+      body: new FormData(this),
+      headers: { Accept: "application/json" },
     });
 
-    if (r.ok) {
-      fmOk.className = 'fm ok';
-      oForm.reset();
-      oBtnTxt.textContent = 'Order Sent ✓';
+    if (response.ok) {
+      window.location.href = "thankyou.html";
     } else {
-      throw new Error();
+      fmErr.style.display = "flex";
+      oBtn.disabled = false;
+      oBtnTxt.textContent = "Confirm My Order";
     }
-
-  } catch {
-    fmErr.className = 'fm er';
-    oBtnTxt.textContent = 'Try Again';
+  } catch (err) {
+    fmErr.style.display = "flex";
     oBtn.disabled = false;
+    oBtnTxt.textContent = "Confirm My Order";
   }
 });
 
