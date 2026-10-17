@@ -65,7 +65,7 @@ ul{list-style:none}
   background:linear-gradient(90deg,#0C4A6E,#075985,#0C4A6E);
   background-size:200% 100%;
   animation:barscroll 6s linear infinite;
-  padding:10px 0;text-align:center;
+  padding:10px 12px;text-align:center;
   font-size:.82rem;font-weight:500;letter-spacing:.03em;
   position:relative;z-index:1001;
 }
@@ -506,7 +506,7 @@ ul{list-style:none}
 }
 .fi::placeholder,.ft::placeholder{color:rgba(148,163,184,.4)}
 .fi:focus,.fs:focus,.ft:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(14,165,233,.12)}
-.fs{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+.fs{padding-right:40px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
 .fs option{background:var(--card2)}
 .ft{resize:vertical;min-height:96px}
 .fm{display:none;padding:14px 18px;border-radius:9px;font-size:.88rem;font-weight:600;margin-top:14px}
@@ -550,6 +550,43 @@ ul{list-style:none}
 .footer__bot{border-top:1px solid var(--border2);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .footer__copy{font-size:.8rem;color:var(--muted)}
 .footer__copy b{color:var(--blue)}
+
+/* ══════════════════════════════════════════
+   FREE EXTRA BATTERY — GIFT OFFER
+══════════════════════════════════════════ */
+.stat-val--gold{color:var(--gold);text-shadow:0 0 24px rgba(245,158,11,.35)}
+.gift-badge,.gift-box{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;border-radius:14px;text-align:left;
+  background:linear-gradient(135deg,rgba(245,158,11,.16),rgba(245,158,11,.05));
+  border:1px dashed rgba(245,158,11,.55);
+}
+.gift-badge{width:fit-content;max-width:100%;margin-bottom:24px;animation:fadeUp .7s .35s both}
+.gift-box{margin-bottom:20px;padding:18px 20px;position:relative;z-index:1}
+.gift-badge__icon{
+  width:46px;height:46px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(245,158,11,.18);color:var(--gold);font-size:1.3rem;
+  animation:giftPulse 2.4s ease-in-out infinite;
+}
+@keyframes giftPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(245,158,11,.4)}50%{transform:scale(1.06);box-shadow:0 0 0 8px rgba(245,158,11,0)}}
+.gift-badge__text{min-width:0}
+.gift-badge__text strong{display:block;font-family:var(--font-h);font-size:1.05rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-light);line-height:1.25;margin-bottom:2px}
+.gift-badge__text span{display:block;font-size:.82rem;color:var(--muted);line-height:1.5}
+.gift-box .gift-badge__text b{color:var(--gold-light)}
+.price-list li.price-list__gift{color:var(--white)}
+.price-list li.price-list__gift i{color:var(--gold)}
+.price-list li.price-list__gift b{color:var(--gold-light)}
+.oc__icon--gold{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:var(--gold)}
+.gift-note{
+  display:flex;align-items:flex-start;gap:10px;margin-top:10px;
+  padding:11px 14px;border-radius:9px;
+  background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);
+  font-size:.84rem;line-height:1.5;color:var(--gold-light);
+}
+.gift-note i{color:var(--gold);margin-top:3px;flex-shrink:0}
+.gift-note b{color:var(--gold)}
+.fs{text-overflow:ellipsis}
 
 /* ══════════════════════════════════════════
    RESPONSIVE
@@ -597,4 +634,17 @@ ul{list-style:none}
   .footer__bot{flex-direction:column;text-align:center}
   .hiw__cta-bar{flex-direction:column;text-align:center}
   .delivery-band__inner{grid-template-columns:1fr}
+}
+
+/* gift offer — responsive */
+@media(max-width:960px){
+  .gift-badge{margin-left:auto;margin-right:auto}
+}
+@media(max-width:600px){
+  .gift-badge,.gift-box{padding:12px 14px;gap:12px}
+  .gift-badge__icon{width:40px;height:40px;font-size:1.1rem}
+  .gift-badge__text strong{font-size:.95rem}
+  .gift-badge__text span{font-size:.78rem}
+  .gift-note{font-size:.8rem}
+  .stat-lbl{font-size:.7rem}
 }

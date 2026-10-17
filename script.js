@@ -82,6 +82,33 @@ const oForm = document.getElementById("oForm"),
   fmOk = document.getElementById("fmOk"),
   fmErr = document.getElementById("fmErr");
 
+/* FREE EXTRA BATTERY — 1 free battery per pump (worth N40,000 / GH₵265) */
+const fq = document.getElementById("fq"),
+  fcSel = document.getElementById("fc"),
+  giftNoteTxt = document.getElementById("giftNoteTxt"),
+  freeGift = document.getElementById("freeGift");
+const GIFT_NGN = 40000,
+  GIFT_GHS = 265;
+
+function updateGift() {
+  const opt = fq.options[fq.selectedIndex];
+  const units = parseInt(opt && opt.dataset.units, 10) || 0;
+  const n = units || 1;
+  const country = fcSel.value;
+  const ngn = "\u20A6" + (GIFT_NGN * n).toLocaleString("en-US");
+  const ghs = "GH\u20B5" + (GIFT_GHS * n).toLocaleString("en-US");
+  const worth =
+    country === "Nigeria" ? ngn : country === "Ghana" ? ghs : ngn + " / " + ghs;
+  const label = n === 1 ? "1 FREE extra battery" : n + " FREE extra batteries";
+
+  giftNoteTxt.innerHTML = units
+    ? "You get <b>" + label + "</b> with your order (worth " + worth + ")."
+    : "Every pump comes with a <b>FREE extra battery</b> (worth " + worth + ").";
+  freeGift.value = n + (n === 1 ? " Extra Battery" : " Extra Batteries") + " (free, worth " + worth + ")";
+}
+fq.addEventListener("change", updateGift);
+fcSel.addEventListener("change", updateGift);
+
 function validate() {
   if (!document.getElementById("fn").value.trim()) {
     alert("Please enter your name.");
@@ -120,6 +147,7 @@ oForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   if (!validate()) return;
+  updateGift();
 
   oBtn.disabled = true;
   oBtnTxt.textContent = "Submitting...";
