@@ -1,43 +1,82 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thank You - Voltage Pump</title>
+    <title>Thank You - VoltEdge Pump</title>
+
     <!-- Meta Pixel Code -->
     <script>
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
+
         n = f.fbq = function () {
           n.callMethod
             ? n.callMethod.apply(n, arguments)
             : n.queue.push(arguments);
         };
+
         if (!f._fbq) f._fbq = n;
+
         n.push = n;
         n.loaded = !0;
         n.version = "2.0";
         n.queue = [];
+
         t = b.createElement(e);
         t.async = !0;
         t.src = v;
+
         s = b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t, s);
       })(
         window,
         document,
         "script",
-        "https://connect.facebook.net/en_US/fbevents.js",
+        "https://connect.facebook.net/en_US/fbevents.js"
       );
 
+      /* Initialize VoltEdge Meta Pixel */
       fbq("init", "808354481549541");
 
+      /* Track page views */
       fbq("track", "PageView");
 
-      fbq("track", "Purchase", {
-        value: 325,
-        currency: "GHS",
-      });
+      /* Track successfully submitted cash-on-delivery orders */
+      try {
+        const savedOrder =
+          sessionStorage.getItem("voltedgeOrder");
+
+        if (savedOrder) {
+          /* Remove stored data to prevent repeat tracking */
+          sessionStorage.removeItem("voltedgeOrder");
+
+          const order = JSON.parse(savedOrder);
+
+          /* Validate order currency */
+          const validCurrency =
+            ["NGN", "GHS"].includes(order.currency);
+
+          /* Validate order value */
+          const validValue =
+            Number.isFinite(order.value) &&
+            order.value > 0;
+
+          /* Send Meta Lead event */
+          if (validCurrency && validValue) {
+            fbq("track", "Lead", {
+              value: order.value,
+              currency: order.currency,
+              content_name: "VoltEdge Cordless Water Pump",
+            });
+          }
+        }
+      } catch (error) {
+        console.warn(
+          "VoltEdge Lead tracking data is unavailable."
+        );
+      }
     </script>
 
     <noscript>
@@ -46,46 +85,55 @@
         width="1"
         style="display: none"
         src="https://www.facebook.com/tr?id=808354481549541&ev=PageView&noscript=1"
+        alt=""
       />
     </noscript>
 
     <!-- End Meta Pixel Code -->
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #f9f9f9;
+        color: #333;
+        padding: 50px 20px;
+      }
+
+      .thank-you-box {
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #0c6b2f;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .phone {
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 15px;
+        color: #d62828;
+      }
+    </style>
   </head>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f9f9f9;
-      color: #333;
-      padding: 50px 20px;
-    }
-    .thank-you-box {
-      background: white;
-      border-radius: 10px;
-      padding: 30px;
-      max-width: 500px;
-      margin: auto;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      color: #0c6b2f;
-    }
-    p {
-      font-size: 18px;
-      line-height: 1.5;
-    }
-    .phone {
-      font-weight: bold;
-      font-size: 20px;
-      margin-top: 15px;
-      color: #d62828;
-    }
-  </style>
   <body>
     <div class="thank-you-box">
-      <h1>✅ Thank You for Ordering the Voltage Pump</h1>
-      <p>Our agent will reach out to you shortly to confirm your order.</p>
+      <h1>&#10003; Thank You for Ordering the VoltEdge Pump!</h1>
+
+      <p>
+        Our agent will reach out to you shortly to confirm your order.
+      </p>
     </div>
   </body>
 </html>
